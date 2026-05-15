@@ -1,0 +1,53 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    callback close();
+
+    in-out property <int> counter: 42;
+    callback request-increase-value();
+
+    in-out property <string> name;
+    callback request-update-name();
+
+    VerticalBox {
+        HorizontalLayout {
+            padding: 8px;
+
+            Text {
+                text: "click botton to close";
+            }
+
+            Button {
+                text: "x";
+                primary: true;
+                width: 2%; // two percent of the screen width
+                height: 2%;
+                clicked => {
+                    root.close()
+                }
+            }
+        }
+
+        Text {
+            text: "Counter: \{root.counter}";
+        }
+
+        Text {
+            text: "\{root.name}";
+        }
+
+        Button {
+            text: "Increase value";
+            clicked => {
+                root.request-increase-value();
+            }
+        }
+
+        Button {
+            text: "Chage name";
+            clicked => {
+                root.request-update-name();
+            }
+        }
+    }
+}
